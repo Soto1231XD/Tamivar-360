@@ -1,0 +1,102 @@
+@import "tailwindcss";
+
+@theme {
+  --color-surface-950: #0b1120;
+  --color-surface-900: #0f172a;
+  --color-surface-800: #161f32;
+  --color-surface-700: #1f2a40;
+  --color-surface-600: #2c3a54;
+  --color-surface-500: #47566f;
+  --color-surface-200: #d7dee8;
+  --color-surface-100: #eef1f6;
+  --color-surface-50: #f8fafc;
+
+  --color-accent-400: #38c2b4;
+  --color-accent-500: #1fa89a;
+  --color-accent-600: #158f83;
+  --color-accent-700: #0f6f66;
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  @apply bg-surface-950 text-surface-100 antialiased;
+  font-family: var(--font-sans);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-surface-600) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-surface-600);
+  border-radius: 9999px;
+}
+
+/* Hotspots — compartido entre PanoramaViewer (Pannellum) e ImageSceneViewer */
+.tour-hotspot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.tour-hotspot--absolute {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  background: none;
+  border: 0;
+  padding: 0;
+}
+
+.tour-hotspot__marker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 9999px;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  transition: transform 0.15s ease;
+}
+.tour-hotspot:hover .tour-hotspot__marker {
+  transform: scale(1.1);
+}
+
+.tour-hotspot--navigation .tour-hotspot__marker {
+  background-color: var(--color-accent-500);
+}
+.tour-hotspot--info .tour-hotspot__marker {
+  background-color: #d97706;
+}
+
+.tour-hotspot__label {
+  max-width: 140px;
+  text-align: center;
+  font-size: 11px;
+  line-height: 1.2;
+  color: white;
+  background: rgba(11, 17, 32, 0.75);
+  padding: 2px 7px;
+  border-radius: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

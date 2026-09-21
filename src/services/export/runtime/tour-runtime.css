@@ -1,0 +1,48 @@
+html, body { height: 100%; margin: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; background: #0b1120; }
+
+#tamivar-tour, .tmv-root { position: relative; width: 100%; height: 100%; background: #0b1120; overflow: hidden; }
+.tmv-stage { position: absolute; inset: 0; }
+.tmv-pano, .tmv-image-wrap { position: absolute; inset: 0; }
+.tmv-image-wrap { display: flex; align-items: center; justify-content: center; background: #0b1120; }
+.tmv-image { max-width: 100%; max-height: 100%; object-fit: contain; user-select: none; }
+.tmv-empty { display: flex; align-items: center; justify-content: center; height: 100%; color: #94a3b8; font-size: 14px; }
+
+.tmv-topbar { position: absolute; top: 0; left: 0; right: 0; display: flex; align-items: flex-start; justify-content: space-between; padding: 12px; pointer-events: none; z-index: 5; }
+.tmv-topbar > * { pointer-events: auto; }
+.tmv-title-pill { background: rgba(11,17,32,0.7); backdrop-filter: blur(6px); border-radius: 9999px; padding: 6px 14px; }
+.tmv-title-pill .tmv-project-name { font-size: 11px; font-weight: 500; color: #cbd5e1; margin: 0; }
+.tmv-title-pill .tmv-scene-name { font-size: 14px; font-weight: 600; color: #f8fafc; margin: 0; }
+.tmv-icon-btn { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 9999px; background: rgba(11,17,32,0.7); backdrop-filter: blur(6px); color: #f1f5f9; border: 0; cursor: pointer; font-size: 15px; }
+.tmv-icon-btn:hover { background: rgba(15,23,42,0.9); }
+.tmv-icon-btn.active { background: #1fa89a; color: #0b1120; }
+.tmv-actions { display: flex; gap: 8px; }
+
+.tmv-roomlist { position: absolute; top: 60px; right: 12px; z-index: 6; width: 220px; max-height: 60%; overflow-y: auto; background: rgba(15,23,42,0.95); border: 1px solid #1f2a40; border-radius: 12px; padding: 8px; backdrop-filter: blur(6px); display: none; }
+.tmv-roomlist.open { display: block; }
+.tmv-roomlist button { display: block; width: 100%; text-align: left; padding: 8px 10px; border-radius: 8px; border: 0; background: transparent; color: #e2e8f0; font-size: 13px; cursor: pointer; }
+.tmv-roomlist button:hover { background: #1f2a40; }
+.tmv-roomlist button.active { background: rgba(31,168,154,0.15); color: #38c2b4; }
+
+.tmv-info-panel { position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); z-index: 6; width: min(360px, calc(100% - 32px)); background: rgba(15,23,42,0.95); border: 1px solid #1f2a40; border-radius: 12px; padding: 16px; backdrop-filter: blur(6px); display: none; }
+.tmv-info-panel.open { display: block; }
+.tmv-info-panel h3 { margin: 0 0 6px; font-size: 14px; color: #f8fafc; }
+.tmv-info-panel p { margin: 0; font-size: 13px; color: #cbd5e1; line-height: 1.5; }
+.tmv-info-panel .tmv-close { position: absolute; top: 10px; right: 10px; background: none; border: 0; color: #94a3b8; cursor: pointer; font-size: 14px; }
+
+.tmv-fade { position: absolute; inset: 0; z-index: 10; background: #0b1120; opacity: 0; pointer-events: none; transition-property: opacity; transition-timing-function: ease-in-out; }
+.tmv-fade--visible { opacity: 1; }
+
+.tmv-thumbnails { position: absolute; bottom: 0; left: 0; right: 0; display: flex; gap: 8px; overflow-x: auto; padding: 10px 12px; background: rgba(15,23,42,0.85); backdrop-filter: blur(6px); z-index: 5; }
+.tmv-thumb { flex-shrink: 0; width: 84px; border: 2px solid transparent; border-radius: 8px; overflow: hidden; background: #161f32; cursor: pointer; padding: 0; }
+.tmv-thumb.active { border-color: #38c2b4; }
+.tmv-thumb img { width: 100%; height: 48px; object-fit: cover; display: block; }
+.tmv-thumb span { display: block; padding: 4px 6px; font-size: 10.5px; color: #e2e8f0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* Hotspots (compartido entre panorámicas e imágenes normales) */
+.tour-hotspot { display: flex; flex-direction: column; align-items: center; gap: 4px; cursor: pointer; user-select: none; }
+.tour-hotspot--absolute { position: absolute; transform: translate(-50%, -50%); background: none; border: 0; padding: 0; }
+.tour-hotspot__marker { display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 9999px; color: #fff; font-size: 14px; font-weight: 600; box-shadow: 0 2px 10px rgba(0,0,0,0.45); border: 2px solid rgba(255,255,255,0.85); }
+.tour-hotspot--navigation .tour-hotspot__marker { background-color: #1fa89a; }
+.tour-hotspot--info .tour-hotspot__marker { background-color: #d97706; }
+.tour-hotspot__label { max-width: 140px; text-align: center; font-size: 11px; line-height: 1.2; color: #fff; background: rgba(11,17,32,0.75); padding: 2px 7px; border-radius: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
