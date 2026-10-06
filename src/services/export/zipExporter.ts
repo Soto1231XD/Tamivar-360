@@ -6,6 +6,7 @@ import tourRuntimeCss from "./runtime/tour-runtime.css?raw";
 import { getImageBlob } from "@/storage/imageStore";
 import { buildExportProject } from "./buildExportData";
 import { buildTourHtmlDocument } from "./htmlDocument";
+import { IMAGE_EXPORT_OPTIONS, PANORAMA_EXPORT_OPTIONS, optimizeImageForExport } from "./optimizeImage";
 import { slugify } from "@/utils/slug";
 import type { Project } from "@/types";
 
@@ -30,15 +31,23 @@ export async function exportProjectAsZip(project: Project): Promise<Blob> {
   const resolveImage = async (
     imageId: string,
     role: "image" | "thumbnail",
-    scene: { name: string; id: string }
+    scene: { name: string; id: string; type: "panorama" | "image" }
   ) => {
     if (!imageId) return "";
     const cacheKey = `${imageId}:${role}`;
     const cached = blobCache.get(cacheKey);
     if (cached) return cached;
 
-    const blob = await getImageBlob(imageId);
-    if (!blob) return "";
+    const original = await getImageBlob(imageId);
+    if (!original) return "";
+
+    const blob =
+      role === "thumbnail"
+        ? original
+        : await optimizeImageForExport(
+            original,
+            scene.type === "panorama" ? PANORAMA_EXPORT_OPTIONS : IMAGE_EXPORT_OPTIONS
+          );
 
     const ext = extensionForBlob(blob);
     const base = `${slugify(scene.name)}${role === "thumbnail" ? "-thumb" : ""}`;
